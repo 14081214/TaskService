@@ -73,22 +73,18 @@ class DialoguePanel {
 		this.diaStateText.width = this.diaStateTextWidth;
 		this.diaStateText.bold = false;
 		this.diaStateText.textColor = this.diaStateTextColor;
-
-
 	}
 
-	private drawTaskPanel() {
+	private drawDiaPanel() {
 		this.rectTaskPanel.graphics.beginFill(0x0000,0.6);
 		this.rectTaskPanel.graphics.drawRect(0,0,this.panelWidth,this.panelHeight);
 		this.rectTaskPanel.graphics.endFill();
-
 	}
 
 	private drawButtonPanel() {
 		this.rectButton.graphics.beginFill(this.buttonColor,1);
 		this.rectButton.graphics.drawRect(this.buttonX,this.buttonY,this.buttonWidth,this.buttonHeight);
 		this.rectButton.graphics.endFill();
-
 	}
 
 	private setButtonText() {
@@ -98,7 +94,6 @@ class DialoguePanel {
 		this.buttonTextField.width = this.buttonTextWidth;
 		this.buttonTextField.bold = false;
 		this.buttonTextField.textColor = this.buttonTextColor;
-
 	}
 
 	private drawButton() {
@@ -117,7 +112,7 @@ class DialoguePanel {
 		this.panel.width = this.panelWidth;
 		this.panel.height = this.panelHeight;
 		this.drawButton();
-		this.drawTaskPanel();
+		this.drawDiaPanel();
 		this.setText();
 		this.panel.addChild(this.rectTaskPanel);
 		this.panel.addChild(this.diaNameTextField);
@@ -158,7 +153,7 @@ class DialoguePanel {
 		this.changeButton(task.status);
 		this.currentTaskStatus = task.status;
 		this.showPanel();
-	} //被通知
+	} 
 
 	private changeTaskText(name:string,desc:string) {
 		this.diaNameTextField.text = name;

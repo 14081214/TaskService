@@ -50,7 +50,7 @@ var DialoguePanel = (function () {
         this.diaStateText.bold = false;
         this.diaStateText.textColor = this.diaStateTextColor;
     };
-    p.drawTaskPanel = function () {
+    p.drawDiaPanel = function () {
         this.rectTaskPanel.graphics.beginFill(0x0000, 0.6);
         this.rectTaskPanel.graphics.drawRect(0, 0, this.panelWidth, this.panelHeight);
         this.rectTaskPanel.graphics.endFill();
@@ -83,7 +83,7 @@ var DialoguePanel = (function () {
         this.panel.width = this.panelWidth;
         this.panel.height = this.panelHeight;
         this.drawButton();
-        this.drawTaskPanel();
+        this.drawDiaPanel();
         this.setText();
         this.panel.addChild(this.rectTaskPanel);
         this.panel.addChild(this.diaNameTextField);

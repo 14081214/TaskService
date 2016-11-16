@@ -82,14 +82,12 @@ class TaskPanel implements Observer {
 		this.rectTaskPanel.graphics.beginFill(this.bgColor_Task, 1);
 		this.rectTaskPanel.graphics.drawRect(0, 0, this.panelWidth, this.panelHeight);
 		this.rectTaskPanel.graphics.endFill();
-
 	}
 
 	private drawButtonPanel() {
 		this.rectButton.graphics.beginFill(this.buttonColor, 1);
 		this.rectButton.graphics.drawRect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight);
 		this.rectButton.graphics.endFill();
-
 	}
 
 	private setButtonText() {
@@ -99,7 +97,6 @@ class TaskPanel implements Observer {
 		this.buttonTextField.width = this.buttonTextWidth;
 		this.buttonTextField.bold = false;
 		this.buttonTextField.textColor = this.buttonTextColor;
-
 	}
 
 	private drawButton() {
