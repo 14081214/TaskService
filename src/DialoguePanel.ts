@@ -7,27 +7,27 @@ class DialoguePanel {
 	private currentTaskId:string;
 	private currentTaskStatus:number;
 
-	private bgColor_Dia = 0x00FFFF;     //green
+	//private bgColor_Dia = 0x00FFFF;     //green
 	private rectTaskPanel:egret.Shape;
 	private panelX = 300;
 	private panelY = 300;
 	private panelWidth = 250;
-	private panelHeight = 200;
+	private panelHeight = 200;     
 
 	private diaNameTextField:egret.TextField;
 	private diaNameText = "";
 	private diaNameTextX = 45;
 	private diaNameTextY = 40;
 	private diaNameTextWidth = 200;
-	private diaNameTexColor = 0x000000;
+	private diaNameTexColor = 0xFFFFFF;
 
 
-	private taskStateText:egret.TextField;
-	private taskStateTextField = "";
-	private taskStateTextX = 20;
-	private taskStateTextY = 90;
-	private taskStateTextWidth = 180;
-	private taskStateTextColor = 0xFF0000;
+	private diaStateText:egret.TextField;
+	private diaStateTextField = "";
+	private diaStateTextX = 20;
+	private diaStateTextY = 90;
+	private diaStateTextWidth = 180;
+	private diaStateTextColor = 0xFF0000;
 	
 	private button:egret.DisplayObjectContainer;
 	private rectButton:egret.Shape;
@@ -51,7 +51,7 @@ class DialoguePanel {
 		this.taskService = taskService;
 		this.panel = new egret.DisplayObjectContainer();
 		this.diaNameTextField = new egret.TextField();
-		this.taskStateText = new egret.TextField();
+		this.diaStateText = new egret.TextField();
 		this.rectTaskPanel = new egret.Shape();
 		this.button = new egret.DisplayObjectContainer();
 		this.rectButton = new egret.Shape();
@@ -67,18 +67,18 @@ class DialoguePanel {
 		this.diaNameTextField.bold = true;
 		this.diaNameTextField.textColor = this.diaNameTexColor;
 
-		this.taskStateText.text = this.taskStateTextField;
-		this.taskStateText.x = this.taskStateTextX;
-		this.taskStateText.y = this.taskStateTextY;
-		this.taskStateText.width = this.taskStateTextWidth;
-		this.taskStateText.bold = false;
-		this.taskStateText.textColor = this.taskStateTextColor;
+		this.diaStateText.text = this.diaStateTextField;
+		this.diaStateText.x = this.diaStateTextX;
+		this.diaStateText.y = this.diaStateTextY;
+		this.diaStateText.width = this.diaStateTextWidth;
+		this.diaStateText.bold = false;
+		this.diaStateText.textColor = this.diaStateTextColor;
 
 
 	}
 
 	private drawTaskPanel() {
-		this.rectTaskPanel.graphics.beginFill(this.bgColor_Dia,1);
+		this.rectTaskPanel.graphics.beginFill(0x0000,0.6);
 		this.rectTaskPanel.graphics.drawRect(0,0,this.panelWidth,this.panelHeight);
 		this.rectTaskPanel.graphics.endFill();
 
@@ -121,7 +121,7 @@ class DialoguePanel {
 		this.setText();
 		this.panel.addChild(this.rectTaskPanel);
 		this.panel.addChild(this.diaNameTextField);
-		this.panel.addChild(this.taskStateText);
+		this.panel.addChild(this.diaStateText);
 		this.panel.addChild(this.button);
 		this.button.touchEnabled = true;
 		this.button.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onButtonClick,this);
@@ -146,12 +146,10 @@ class DialoguePanel {
 
 	public showPanel() {
 		this.stage.addChild(this.panel);
-
 	}
 
 	public removePanel() {
 		this.stage.removeChild(this.panel);
-
 	}
 
 	public onOpen(task:Task) {
@@ -160,13 +158,11 @@ class DialoguePanel {
 		this.changeButton(task.status);
 		this.currentTaskStatus = task.status;
 		this.showPanel();
-
 	} //被通知
 
 	private changeTaskText(name:string,desc:string) {
 		this.diaNameTextField.text = name;
-		this.taskStateText.text = desc;
-
+		this.diaStateText.text = desc;
 	}
 
 	private changeButton(taskStatus:number) {
@@ -182,7 +178,6 @@ class DialoguePanel {
 			default:
 				this.buttonTextField.text = "";
 				break;
-
 		}
 
 	}

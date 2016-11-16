@@ -1,6 +1,5 @@
 var DialoguePanel = (function () {
     function DialoguePanel(stage, taskService) {
-        this.bgColor_Dia = 0x00FFFF; //green
         this.panelX = 300;
         this.panelY = 300;
         this.panelWidth = 250;
@@ -9,12 +8,12 @@ var DialoguePanel = (function () {
         this.diaNameTextX = 45;
         this.diaNameTextY = 40;
         this.diaNameTextWidth = 200;
-        this.diaNameTexColor = 0x000000;
-        this.taskStateTextField = "";
-        this.taskStateTextX = 20;
-        this.taskStateTextY = 90;
-        this.taskStateTextWidth = 180;
-        this.taskStateTextColor = 0xFF0000;
+        this.diaNameTexColor = 0xFFFFFF;
+        this.diaStateTextField = "";
+        this.diaStateTextX = 20;
+        this.diaStateTextY = 90;
+        this.diaStateTextWidth = 180;
+        this.diaStateTextColor = 0xFF0000;
         this.buttonColor = 0xC0C0C0;
         this.buttonX = 40;
         this.buttonY = 140;
@@ -29,7 +28,7 @@ var DialoguePanel = (function () {
         this.taskService = taskService;
         this.panel = new egret.DisplayObjectContainer();
         this.diaNameTextField = new egret.TextField();
-        this.taskStateText = new egret.TextField();
+        this.diaStateText = new egret.TextField();
         this.rectTaskPanel = new egret.Shape();
         this.button = new egret.DisplayObjectContainer();
         this.rectButton = new egret.Shape();
@@ -44,15 +43,15 @@ var DialoguePanel = (function () {
         this.diaNameTextField.width = this.diaNameTextWidth;
         this.diaNameTextField.bold = true;
         this.diaNameTextField.textColor = this.diaNameTexColor;
-        this.taskStateText.text = this.taskStateTextField;
-        this.taskStateText.x = this.taskStateTextX;
-        this.taskStateText.y = this.taskStateTextY;
-        this.taskStateText.width = this.taskStateTextWidth;
-        this.taskStateText.bold = false;
-        this.taskStateText.textColor = this.taskStateTextColor;
+        this.diaStateText.text = this.diaStateTextField;
+        this.diaStateText.x = this.diaStateTextX;
+        this.diaStateText.y = this.diaStateTextY;
+        this.diaStateText.width = this.diaStateTextWidth;
+        this.diaStateText.bold = false;
+        this.diaStateText.textColor = this.diaStateTextColor;
     };
     p.drawTaskPanel = function () {
-        this.rectTaskPanel.graphics.beginFill(this.bgColor_Dia, 1);
+        this.rectTaskPanel.graphics.beginFill(0x0000, 0.6);
         this.rectTaskPanel.graphics.drawRect(0, 0, this.panelWidth, this.panelHeight);
         this.rectTaskPanel.graphics.endFill();
     };
@@ -88,7 +87,7 @@ var DialoguePanel = (function () {
         this.setText();
         this.panel.addChild(this.rectTaskPanel);
         this.panel.addChild(this.diaNameTextField);
-        this.panel.addChild(this.taskStateText);
+        this.panel.addChild(this.diaStateText);
         this.panel.addChild(this.button);
         this.button.touchEnabled = true;
         this.button.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
@@ -120,7 +119,7 @@ var DialoguePanel = (function () {
     }; //被通知
     p.changeTaskText = function (name, desc) {
         this.diaNameTextField.text = name;
-        this.taskStateText.text = desc;
+        this.diaStateText.text = desc;
     };
     p.changeButton = function (taskStatus) {
         switch (taskStatus) {

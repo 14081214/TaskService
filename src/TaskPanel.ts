@@ -6,7 +6,7 @@ class TaskPanel implements Observer {
 	private currentTaskId: string;
 	private currentTaskStatus: number;
 
-	private bgColor_Task = 0x87CEFA;              //Task Panel
+	private bgColor_Task = 0xd6ecf0;              //Task Panel
 	private rectTaskPanel: egret.Shape;
 	private panelX = 20;
 	private panelY = 350;
@@ -30,7 +30,7 @@ class TaskPanel implements Observer {
 
 	private button: egret.DisplayObjectContainer;
 	private rectButton: egret.Shape;
-	private buttonColor = 0xC0C0C0;         //sliver
+	private buttonColor = 0xe3f9fd;         
 	private buttonX = 50;
 	private buttonY = 130;
 	private buttonWidth = 150;

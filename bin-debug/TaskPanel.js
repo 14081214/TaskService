@@ -1,6 +1,6 @@
 var TaskPanel = (function () {
     function TaskPanel(stage, taskService) {
-        this.bgColor_Task = 0x87CEFA; //Task Panel
+        this.bgColor_Task = 0xd6ecf0; //Task Panel
         this.panelX = 20;
         this.panelY = 350;
         this.panelWidth = 250;
@@ -15,7 +15,7 @@ var TaskPanel = (function () {
         this.taskStateTextY = 80;
         this.taskStateTextWidth = 180;
         this.taskStateTextColor = 0xFF0000;
-        this.buttonColor = 0xC0C0C0; //sliver
+        this.buttonColor = 0xe3f9fd;
         this.buttonX = 50;
         this.buttonY = 130;
         this.buttonWidth = 150;
