@@ -34,7 +34,7 @@ class DialoguePanel {
 	private buttonColor = 0xC0C0C0;
 	private buttonX = 40;
 	private buttonY = 140;
-	private buttonWidth = 150;
+	private buttonWidth = 180;
 	private buttonHeight = 45;
 
 
@@ -131,16 +131,12 @@ class DialoguePanel {
 	private onButtonClick(e:egret.TouchEvent) {          //按钮点击
 		switch(this.currentTaskStatus){
 			case TaskStatus.ACCEPTABLE:
-				//console.log("Accept Button Click");
-				//console.log("Current Task Id: "+ this.currentTaskId);
 				this.taskService.accept(this.currentTaskId);
 				break;
 			case TaskStatus.CAN_SUBMIT:
-				//console.log("Submit Button Click");
 				this.taskService.finish(this.currentTaskId);
 				break;
 			default:
-				//console.log("Button Click");
 		}
 
 		this.stage.removeChild(this.panel);
@@ -176,11 +172,11 @@ class DialoguePanel {
 	private changeButton(taskStatus:number) {
 		switch(taskStatus){
 			case TaskStatus.ACCEPTABLE:
-				this.buttonTextField.text = "接受任务";
+				this.buttonTextField.text = "accept task";
 				break;
 
 			case TaskStatus.CAN_SUBMIT:
-				this.buttonTextField.text = "提交任务";
+				this.buttonTextField.text = "submit task";
 				break;
 
 			default:

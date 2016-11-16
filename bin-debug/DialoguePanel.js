@@ -18,7 +18,7 @@ var DialoguePanel = (function () {
         this.buttonColor = 0xC0C0C0;
         this.buttonX = 40;
         this.buttonY = 140;
-        this.buttonWidth = 150;
+        this.buttonWidth = 180;
         this.buttonHeight = 45;
         this.buttonText = "OK";
         this.buttonTextX = this.buttonX + 15;
@@ -96,12 +96,9 @@ var DialoguePanel = (function () {
     p.onButtonClick = function (e) {
         switch (this.currentTaskStatus) {
             case TaskStatus.ACCEPTABLE:
-                //console.log("Accept Button Click");
-                //console.log("Current Task Id: "+ this.currentTaskId);
                 this.taskService.accept(this.currentTaskId);
                 break;
             case TaskStatus.CAN_SUBMIT:
-                //console.log("Submit Button Click");
                 this.taskService.finish(this.currentTaskId);
                 break;
             default:
@@ -128,10 +125,10 @@ var DialoguePanel = (function () {
     p.changeButton = function (taskStatus) {
         switch (taskStatus) {
             case TaskStatus.ACCEPTABLE:
-                this.buttonTextField.text = "接受任务";
+                this.buttonTextField.text = "accept task";
                 break;
             case TaskStatus.CAN_SUBMIT:
-                this.buttonTextField.text = "提交任务";
+                this.buttonTextField.text = "submit task";
                 break;
             default:
                 this.buttonTextField.text = "";
