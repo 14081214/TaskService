@@ -7,6 +7,17 @@ var Observer = (function () {
     return Observer;
 }());
 egret.registerClass(Observer,'Observer');
+var TaskCondition = (function () {
+    function TaskCondition() {
+    }
+    var d = __define,c=TaskCondition,p=c.prototype;
+    p.onAccept = function (task) {
+    };
+    p.onSubmit = function (task) {
+    };
+    return TaskCondition;
+}());
+egret.registerClass(TaskCondition,'TaskCondition');
 var Task = (function () {
     function Task(id, name, desc, status, fromNpcId, toNpcId) {
         this.id = id;
@@ -17,10 +28,6 @@ var Task = (function () {
         this.toNpcId = toNpcId;
     }
     var d = __define,c=Task,p=c.prototype;
-    p.onAccept = function (task) {
-    };
-    p.onSubmit = function (task) {
-    };
     p.checkTaskStatus = function () {
     };
     return Task;

@@ -85,12 +85,6 @@ class TaskPanel implements Observer {
 		this.rectTaskPanel.graphics.drawRect(0, 0, this.panelWidth, this.panelHeight);
 		this.rectTaskPanel.graphics.endFill();
 	}
-
-	private drawButtonPanel() {
-		this.rectButton.graphics.beginFill(this.buttonColor, 1);
-		this.rectButton.graphics.drawRect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight);
-		this.rectButton.graphics.endFill();
-	}
 	
 	private setButtonText() {
 		this.buttonTextField.fontFamily = "KaiTi";
@@ -103,7 +97,9 @@ class TaskPanel implements Observer {
 	}
 
 	private drawButton() {
-		this.drawButtonPanel();
+		this.rectButton.graphics.beginFill(this.buttonColor, 1);
+		this.rectButton.graphics.drawRect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight);
+		this.rectButton.graphics.endFill();
 		this.setButtonText();
 		this.button.addChild(this.rectButton);
 		this.button.addChild(this.buttonTextField);

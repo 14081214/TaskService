@@ -125,10 +125,10 @@ class DialoguePanel {
 	private onButtonClick(e:egret.TouchEvent) {          //按钮点击
 		switch(this.currentTaskStatus){
 			case TaskStatus.ACCEPTABLE:
-				this.taskService.accept(this.currentTaskId);
+				this.taskService.accepted(this.currentTaskId);
 				break;
 			case TaskStatus.CAN_SUBMIT:
-				this.taskService.finish(this.currentTaskId);
+				this.taskService.finished(this.currentTaskId);
 				break;
 			default:
 		}

@@ -1,88 +1,83 @@
 class MonsterKilledPanel {
     panel: egret.DisplayObjectContainer;
-
     stage: egret.DisplayObjectContainer;
 
     private taskService: TaskService;
     private currentTaskId: string;
-    private currentTaskStatus: number;
+    private currentTaskState: number;
     
-    private button: egret.DisplayObjectContainer;
-    private buttonBack: egret.Shape;
-    private buttonColor = 0xd6ecf0;
-    private buttonX = 20;
-    private buttonY = 600;
-    private buttonWidth = 250;
-    private buttonHeight = 50;
+    private monsterPanel: egret.DisplayObjectContainer;
+    private rectMP: egret.Shape;
+    private mpColor = 0xd6ecf0;
+    private mpX = 20;
+    private mpY = 600;
+    private mpWidth = 250;
+    private mpHeight = 50;
 
-    private buttonTextField: egret.TextField;
-    private buttonTextFieldText = " Kill a monster";
-    private buttonTextFieldX = this.buttonX + 8;
-    private buttonTextFieldY = this.buttonY + 5;
-    private buttonTextFieldWidth = 230;
-    private buttonTextFieldColor = 0x000000;
-
-    public monsterValue = 0;
-
+    private mpTextField: egret.TextField;
+    private mpTextFieldText = " Kill a monster";
+    private mpTextFieldX = this.mpX + 8;
+    private mpTextFieldY = this.mpY + 5;
+    private mpTextFieldWidth = 230;
+    private mpTextFieldColor = 0x000000;
+    public monsterAmount = 0;
 
     public constructor(stage: egret.DisplayObjectContainer, taskService: TaskService) {
         this.stage = stage;
         this.taskService = taskService;
         this.taskService.Attach(this, "MonsterKilledPanel");
         this.panel = new egret.DisplayObjectContainer();
-        this.button = new egret.DisplayObjectContainer();
-        this.buttonBack = new egret.Shape();
-        this.buttonTextField = new egret.TextField();
+        this.monsterPanel = new egret.DisplayObjectContainer();
+        this.rectMP = new egret.Shape();
+        this.mpTextField = new egret.TextField();
         this.stage.addChild(this.panel);
         this.drawPanel();
     }
-    private drawButtonBack() {
-        this.buttonBack.graphics.beginFill(this.buttonColor, 1);
-        this.buttonBack.graphics.drawRect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight);
-        this.buttonBack.graphics.endFill();
 
-    }
     private setButtonText() {
-        this.buttonTextField.fontFamily = "KaiTi";
-        this.buttonTextField.text = this.buttonTextFieldText;
-        this.buttonTextField.x = this.buttonTextFieldX;
-        this.buttonTextField.y = this.buttonTextFieldY;
-        this.buttonTextField.width = this.buttonTextFieldWidth;
-        this.buttonTextField.bold = false;
-        this.buttonTextField.textColor = this.buttonTextFieldColor;
+        this.mpTextField.fontFamily = "KaiTi";
+        this.mpTextField.text = this.mpTextFieldText;
+        this.mpTextField.x = this.mpTextFieldX;
+        this.mpTextField.y = this.mpTextFieldY;
+        this.mpTextField.width = this.mpTextFieldWidth;
+        this.mpTextField.bold = false;
+        this.mpTextField.textColor = this.mpTextFieldColor;
 
     }
     private drawButton() {
-        this.drawButtonBack();
+        this.rectMP.graphics.beginFill(this.mpColor, 1);
+        this.rectMP.graphics.drawRect(this.mpX, this.mpY, this.mpWidth, this.mpHeight);
+        this.rectMP.graphics.endFill();
+
         this.setButtonText();
-        this.button.addChild(this.buttonBack);
-        this.button.addChild(this.buttonTextField);
+        this.monsterPanel.addChild(this.rectMP);
+        this.monsterPanel.addChild(this.mpTextField);
     }
 
     public drawPanel() {
         this.drawButton();
-        this.panel.addChild(this.button);
+        this.panel.addChild(this.monsterPanel);
 
-        this.button.touchEnabled = true;
-        this.button.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
+        this.monsterPanel.touchEnabled = true;
+        this.monsterPanel.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
 
     }
     private onButtonClick(e: egret.TouchEvent) {
-        switch (this.currentTaskStatus) {
+        switch (this.currentTaskState) {
             case TaskStatus.ACCEPTABLE:
                 break;
 
             case TaskStatus.DURING:
-                this.monsterValue++;
-                console.log(this.monsterValue);
-                if(this.monsterValue==10){
-                    this.taskService.canFinish(this.currentTaskId);
+                this.monsterAmount++;
+                console.log(this.monsterAmount);
+                if(this.monsterAmount==10){
+                    this.taskService.canFinished(this.currentTaskId);
                 }
                 break;
 
 
             case TaskStatus.CAN_SUBMIT:
-                this.monsterValue = 0;
+                this.monsterAmount = 0;
                 break;
 
             default:
@@ -92,7 +87,7 @@ class MonsterKilledPanel {
     }
     public onChange(task: Task) {
         this.currentTaskId = task.id;
-        this.currentTaskStatus = task.status;
+        this.currentTaskState = task.status;
 
     }
 }

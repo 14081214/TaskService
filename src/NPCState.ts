@@ -18,7 +18,7 @@ class TaskNoneState implements State {
 
 }
 
-class TaskAvilableState implements State {
+class TaskState implements State {
 
     private npc: NPC;
 
@@ -37,14 +37,10 @@ class TaskAvilableState implements State {
     onEnter() {
         this.drawTaskSign();
         this.npc.npcStage.addChild(this.taskSign);
-        console.log("Enter Task Avilable State");
-
     }
 
     onExit() {
         this.npc.npcStage.removeChild(this.taskSign);
-        console.log("Exit Task Avilable State");
-
     }
 
     drawTaskSign() {
@@ -58,9 +54,9 @@ class TaskAvilableState implements State {
 
 }
 
-class TaskDuringState implements State {
+class TaskDuringStatus implements State {
 
-      private npc: NPC;
+    private npc: NPC;
 
     taskSign: egret.Bitmap;
     taskSighX = 15;
@@ -77,14 +73,10 @@ class TaskDuringState implements State {
     onEnter() {
         this.drawTaskSign();
         this.npc.npcStage.addChild(this.taskSign);
-        console.log("Enter Task Avilable State");
-
     }
 
     onExit() {
         this.npc.npcStage.removeChild(this.taskSign);
-        console.log("Exit Task Avilable State");
-
     }
 
     drawTaskSign() {
@@ -97,7 +89,7 @@ class TaskDuringState implements State {
     }
 }
 
-class TaskSubmitState implements State {
+class TaskSubmitStatus implements State {
 
     private npc: NPC;
 

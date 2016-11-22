@@ -3,6 +3,15 @@ class Observer{
     }
 }
 
+class TaskCondition {
+    onAccept(task: Task) {
+
+    }
+    onSubmit(task: Task) {
+
+    }
+}
+
 class Task {
     id: string;
     name: string;
@@ -10,12 +19,7 @@ class Task {
     status: TaskStatus;
     fromNpcId: string;
     toNpcId: string;
-    onAccept(task){
-
-    }
-    onSubmit(task){
-
-    }
+    
     private checkTaskStatus(){
         
     }

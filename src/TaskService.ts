@@ -19,7 +19,7 @@ class TaskService implements Observer {
 			element.observer.onChange(task);
 		});
 	}
-	public canAccept(id: string) {
+	public canAccepted(id: string) {
 		var task: Task;
 		task = taskSearch(this.taskList, id);
 		switch (id) {
@@ -29,7 +29,7 @@ class TaskService implements Observer {
 				break;
 		}
 	}
-	public canFinish(id: string) {
+	public canFinished(id: string) {
 		var task: Task;
 		task = taskSearch(this.taskList, id);
 		switch (id) {
@@ -39,14 +39,14 @@ class TaskService implements Observer {
 				break;
 		}
 	}
-	public finish(id: string): ErrorCode {
+	public finished(id: string): ErrorCode {
 		var task: Task;
 		task = taskSearch(this.taskList, id);
 		switch (id) {
 			case "001":
 				task.status = 4;
 				this.Notify(task);
-				this.canAccept("002");
+				this.canAccepted("002");
 				break;
 
 			case "002":
@@ -57,7 +57,7 @@ class TaskService implements Observer {
 				return ErrorCode.TASK_ERROR_UNFIND;
 		}
 	}
-	public accept(id: string): void {
+	public accepted(id: string): void {
 		var task: Task;
 		task = taskSearch(this.taskList, id);
 		switch (id) {
@@ -71,7 +71,6 @@ class TaskService implements Observer {
 				this.Notify(task);
 				break;
 			default:
-				console.log("Task cannot be found");
 		}
 	}
 	public during(id: string) {
@@ -106,7 +105,7 @@ class TaskService implements Observer {
 
 	}
 
-	getTaskByCustomRole(rule: Function, Id: string): Task {
+	getTask(rule: Function, Id: string): Task {
 		return rule(this.taskList, Id);
 
 	}
@@ -188,21 +187,13 @@ function taskSearch(taskList: Task[], id: string): Task {
 	for (var i = 0; i <= taskList.length - 1; i++) {
 		if (taskList[i].id == id) {
 			return taskList[i];
-
 		}
 		else {
-			console.log("task named" + id + "can not be found");
 		}
 	}
 
 }
 
-enum ErrorCode {
-
-    TASK_ERROR_NULL,
-    TASK_ERROR_UNFIND
-
-}
 class ObserverType {
 
 	observer: Observer;
@@ -214,3 +205,11 @@ class ObserverType {
 	}
 
 }
+
+enum ErrorCode {
+
+    TASK_ERROR_NULL,
+    TASK_ERROR_UNFIND
+
+}
+

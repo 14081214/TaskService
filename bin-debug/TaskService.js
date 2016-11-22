@@ -16,7 +16,7 @@ var TaskService = (function () {
             element.observer.onChange(task);
         });
     };
-    p.canAccept = function (id) {
+    p.canAccepted = function (id) {
         var task;
         task = taskSearch(this.taskList, id);
         switch (id) {
@@ -26,7 +26,7 @@ var TaskService = (function () {
                 break;
         }
     };
-    p.canFinish = function (id) {
+    p.canFinished = function (id) {
         var task;
         task = taskSearch(this.taskList, id);
         switch (id) {
@@ -36,14 +36,14 @@ var TaskService = (function () {
                 break;
         }
     };
-    p.finish = function (id) {
+    p.finished = function (id) {
         var task;
         task = taskSearch(this.taskList, id);
         switch (id) {
             case "001":
                 task.status = 4;
                 this.Notify(task);
-                this.canAccept("002");
+                this.canAccepted("002");
                 break;
             case "002":
                 task.status = 4;
@@ -53,7 +53,7 @@ var TaskService = (function () {
                 return ErrorCode.TASK_ERROR_UNFIND;
         }
     };
-    p.accept = function (id) {
+    p.accepted = function (id) {
         var task;
         task = taskSearch(this.taskList, id);
         switch (id) {
@@ -66,7 +66,6 @@ var TaskService = (function () {
                 this.Notify(task);
                 break;
             default:
-                console.log("Task cannot be found");
         }
     };
     p.during = function (id) {
@@ -97,7 +96,7 @@ var TaskService = (function () {
                 break;
         }
     };
-    p.getTaskByCustomRole = function (rule, Id) {
+    p.getTask = function (rule, Id) {
         return rule(this.taskList, Id);
     };
     p.checkTaskStatus = function (task, npcId, DialoguePanel) {
@@ -179,15 +178,9 @@ function taskSearch(taskList, id) {
             return taskList[i];
         }
         else {
-            console.log("task named" + id + "can not be found");
         }
     }
 }
-var ErrorCode;
-(function (ErrorCode) {
-    ErrorCode[ErrorCode["TASK_ERROR_NULL"] = 0] = "TASK_ERROR_NULL";
-    ErrorCode[ErrorCode["TASK_ERROR_UNFIND"] = 1] = "TASK_ERROR_UNFIND";
-})(ErrorCode || (ErrorCode = {}));
 var ObserverType = (function () {
     function ObserverType(observer, type) {
         this.observer = observer;
@@ -197,4 +190,9 @@ var ObserverType = (function () {
     return ObserverType;
 }());
 egret.registerClass(ObserverType,'ObserverType');
+var ErrorCode;
+(function (ErrorCode) {
+    ErrorCode[ErrorCode["TASK_ERROR_NULL"] = 0] = "TASK_ERROR_NULL";
+    ErrorCode[ErrorCode["TASK_ERROR_UNFIND"] = 1] = "TASK_ERROR_UNFIND";
+})(ErrorCode || (ErrorCode = {}));
 //# sourceMappingURL=TaskService.js.map

@@ -28,9 +28,9 @@ class NPC implements Observer {
     npcStageHeight = 128;
 
     taskNoneState: State;
-    taskAvilableState: State;
-    taskSubmitState: State;
-    taskDuringState: State;
+    taskState: State;
+    taskSubmitStatus: State;
+    taskDuringStatus: State;
     taskStateMachine: StateMachine;
     NPCtalkpanel:DialoguePanel;
     mockkillmosterbutton:MonsterKilledPanel;
@@ -45,18 +45,17 @@ class NPC implements Observer {
         this.taskService.Attach(this, "NPC");
 
         this.taskNoneState = new TaskNoneState(this);
-        this.taskAvilableState = new TaskAvilableState(this);
-        this.taskDuringState = new TaskDuringState(this);
-        this.taskSubmitState = new TaskSubmitState(this);
+        this.taskState = new TaskState(this);
+        this.taskDuringStatus = new TaskDuringStatus(this);
+        this.taskSubmitStatus = new TaskSubmitStatus(this);
 
         this.taskStateMachine = new StateMachine(this.taskNoneState);
         this.NPCtalkpanel=NPCtalkpanel;
     }
 
     getTask() {
-        this.task = this.taskService.getTaskByCustomRole(this.rule, this.npcId);
-        console.log("This Task State: " + this.task.status);
-        this.checkState();
+        this.task = this.taskService.getTask(this.rule, this.npcId);
+        this.checkNpcState();
     }
     
 
@@ -68,7 +67,6 @@ class NPC implements Observer {
         this.emoji.height = this.tileSize;
         this.npcStageX = npcX;
         this.npcStageY = npcY;
-        //this.setemoji();
     }
     setNpc_1(npcX: number, npcY: number) {
         this.emoji.texture = RES.getRes(emojiImage.npc_1);
@@ -78,15 +76,9 @@ class NPC implements Observer {
         this.emoji.height = this.tileSize;
         this.npcStageX = npcX;
         this.npcStageY = npcY;
-        //this.setemoji();
-    }
-
-    drawNpcShape() {
-        
     }
 
     drawNpc() {
-        this.drawNpcShape();
         this.npcStageShape.graphics.drawRect(0, 0, this.npcStageWidth, this.npcStageHeight);
         this.npcStageShape.graphics.endFill();
 
@@ -102,7 +94,7 @@ class NPC implements Observer {
         this.emoji.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onNpcClick, this);
     }
 
-    checkState() {
+    checkNpcState() {
         switch (this.task.status) {
             case TaskStatus.UNACCEPTABLE:
             case TaskStatus.SUBMITTED:
@@ -111,14 +103,14 @@ class NPC implements Observer {
 
             case TaskStatus.ACCEPTABLE:
                 if (this.task.fromNpcId == this.npcId) {
-                    this.taskStateMachine.changeState(this.taskAvilableState);
+                    this.taskStateMachine.changeState(this.taskState);
                 } else {
                     this.taskStateMachine.changeState(this.taskNoneState);
                 }
                 break;
             case TaskStatus.DURING:
                 if (this.task.toNpcId == this.npcId) {
-                    this.taskStateMachine.changeState(this.taskDuringState);
+                    this.taskStateMachine.changeState(this.taskDuringStatus);
                 } else {
                     this.taskStateMachine.changeState(this.taskNoneState);
                 }
@@ -127,7 +119,7 @@ class NPC implements Observer {
 
             case TaskStatus.CAN_SUBMIT:
                 if (this.task.toNpcId == this.npcId) {
-                    this.taskStateMachine.changeState(this.taskSubmitState);
+                    this.taskStateMachine.changeState(this.taskSubmitStatus);
                 } else {
                     this.taskStateMachine.changeState(this.taskNoneState);
                 }
@@ -142,7 +134,7 @@ class NPC implements Observer {
 
     onChange(task: Task) {
         this.task = task;
-        this.checkState();
+        this.checkNpcState();
     }
 
     rule(taskList: Task[], npcId: string): Task {

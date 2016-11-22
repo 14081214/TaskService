@@ -62,11 +62,6 @@ var TaskPanel = (function () {
         this.rectTaskPanel.graphics.drawRect(0, 0, this.panelWidth, this.panelHeight);
         this.rectTaskPanel.graphics.endFill();
     };
-    p.drawButtonPanel = function () {
-        this.rectButton.graphics.beginFill(this.buttonColor, 1);
-        this.rectButton.graphics.drawRect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight);
-        this.rectButton.graphics.endFill();
-    };
     p.setButtonText = function () {
         this.buttonTextField.fontFamily = "KaiTi";
         this.buttonTextField.text = this.buttonText;
@@ -77,7 +72,9 @@ var TaskPanel = (function () {
         this.buttonTextField.textColor = this.buttonTextColor;
     };
     p.drawButton = function () {
-        this.drawButtonPanel();
+        this.rectButton.graphics.beginFill(this.buttonColor, 1);
+        this.rectButton.graphics.drawRect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight);
+        this.rectButton.graphics.endFill();
         this.setButtonText();
         this.button.addChild(this.rectButton);
         this.button.addChild(this.buttonTextField);

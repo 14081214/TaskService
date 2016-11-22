@@ -20,17 +20,16 @@ var NPC = (function () {
         this.taskService = taskService;
         this.taskService.Attach(this, "NPC");
         this.taskNoneState = new TaskNoneState(this);
-        this.taskAvilableState = new TaskAvilableState(this);
-        this.taskDuringState = new TaskDuringState(this);
-        this.taskSubmitState = new TaskSubmitState(this);
+        this.taskState = new TaskState(this);
+        this.taskDuringStatus = new TaskDuringStatus(this);
+        this.taskSubmitStatus = new TaskSubmitStatus(this);
         this.taskStateMachine = new StateMachine(this.taskNoneState);
         this.NPCtalkpanel = NPCtalkpanel;
     }
     var d = __define,c=NPC,p=c.prototype;
     p.getTask = function () {
-        this.task = this.taskService.getTaskByCustomRole(this.rule, this.npcId);
-        console.log("This Task State: " + this.task.status);
-        this.checkState();
+        this.task = this.taskService.getTask(this.rule, this.npcId);
+        this.checkNpcState();
     };
     p.setNpc_0 = function (npcX, npcY) {
         this.emoji.texture = RES.getRes(emojiImage.npc_0);
@@ -40,7 +39,6 @@ var NPC = (function () {
         this.emoji.height = this.tileSize;
         this.npcStageX = npcX;
         this.npcStageY = npcY;
-        //this.setemoji();
     };
     p.setNpc_1 = function (npcX, npcY) {
         this.emoji.texture = RES.getRes(emojiImage.npc_1);
@@ -50,12 +48,8 @@ var NPC = (function () {
         this.emoji.height = this.tileSize;
         this.npcStageX = npcX;
         this.npcStageY = npcY;
-        //this.setemoji();
-    };
-    p.drawNpcShape = function () {
     };
     p.drawNpc = function () {
-        this.drawNpcShape();
         this.npcStageShape.graphics.drawRect(0, 0, this.npcStageWidth, this.npcStageHeight);
         this.npcStageShape.graphics.endFill();
         this.npcStage.x = this.npcStageX;
@@ -68,7 +62,7 @@ var NPC = (function () {
         //this.npcStage.touchEnabled = true;
         this.emoji.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onNpcClick, this);
     };
-    p.checkState = function () {
+    p.checkNpcState = function () {
         switch (this.task.status) {
             case TaskStatus.UNACCEPTABLE:
             case TaskStatus.SUBMITTED:
@@ -76,7 +70,7 @@ var NPC = (function () {
                 break;
             case TaskStatus.ACCEPTABLE:
                 if (this.task.fromNpcId == this.npcId) {
-                    this.taskStateMachine.changeState(this.taskAvilableState);
+                    this.taskStateMachine.changeState(this.taskState);
                 }
                 else {
                     this.taskStateMachine.changeState(this.taskNoneState);
@@ -84,7 +78,7 @@ var NPC = (function () {
                 break;
             case TaskStatus.DURING:
                 if (this.task.toNpcId == this.npcId) {
-                    this.taskStateMachine.changeState(this.taskDuringState);
+                    this.taskStateMachine.changeState(this.taskDuringStatus);
                 }
                 else {
                     this.taskStateMachine.changeState(this.taskNoneState);
@@ -92,7 +86,7 @@ var NPC = (function () {
                 break;
             case TaskStatus.CAN_SUBMIT:
                 if (this.task.toNpcId == this.npcId) {
-                    this.taskStateMachine.changeState(this.taskSubmitState);
+                    this.taskStateMachine.changeState(this.taskSubmitStatus);
                 }
                 else {
                     this.taskStateMachine.changeState(this.taskNoneState);
@@ -107,7 +101,7 @@ var NPC = (function () {
     };
     p.onChange = function (task) {
         this.task = task;
-        this.checkState();
+        this.checkNpcState();
     };
     p.rule = function (taskList, npcId) {
         for (var i = 0; i < taskList.length; i++) {
