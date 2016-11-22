@@ -10,6 +10,15 @@ class Task {
     status: TaskStatus;
     fromNpcId: string;
     toNpcId: string;
+    onAccept(task){
+
+    }
+    onSubmit(task){
+
+    }
+    private checkTaskStatus(){
+        
+    }
     public constructor(id, name, desc, status, fromNpcId, toNpcId) {
         this.id=id;
         this.name=name;

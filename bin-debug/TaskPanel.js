@@ -9,11 +9,12 @@ var TaskPanel = (function () {
         this.taskNameTextFieldX = 46;
         this.taskNameTextFieldY = 25;
         this.taskNameTextFieldWidth = 200;
+        this.taskNameTextFieldHeight = 30;
         this.taskNameTextFieldColor = 0x000000;
         this.taskStateTextField = "";
         this.taskStateTextX = 30;
         this.taskStateTextY = 80;
-        this.taskStateTextWidth = 180;
+        this.taskStateTextWidth = 230;
         this.taskStateTextColor = 0xFF0000;
         this.buttonColor = 0xe3f9fd;
         this.buttonX = 50;
@@ -40,12 +41,14 @@ var TaskPanel = (function () {
     }
     var d = __define,c=TaskPanel,p=c.prototype;
     p.setText = function () {
+        this.taskNameTextField.fontFamily = "KaiTi";
         this.taskNameTextField.text = this.taskNameTextFieldText;
         this.taskNameTextField.x = this.taskNameTextFieldX;
         this.taskNameTextField.y = this.taskNameTextFieldY;
         this.taskNameTextField.width = this.taskNameTextFieldWidth;
         this.taskNameTextField.bold = true;
         this.taskNameTextField.textColor = this.taskNameTextFieldColor;
+        this.taskStateText.fontFamily = "KaiTi";
         this.taskStateText.text = this.taskStateTextField;
         this.taskStateText.x = this.taskStateTextX;
         this.taskStateText.y = this.taskStateTextY;
@@ -65,6 +68,7 @@ var TaskPanel = (function () {
         this.rectButton.graphics.endFill();
     };
     p.setButtonText = function () {
+        this.buttonTextField.fontFamily = "KaiTi";
         this.buttonTextField.text = this.buttonText;
         this.buttonTextField.x = this.buttonTextX;
         this.buttonTextField.y = this.buttonTextY;
@@ -91,7 +95,18 @@ var TaskPanel = (function () {
         this.panel.addChild(this.taskStateText);
         this.panel.addChild(this.button);
         this.button.touchEnabled = true;
-        //this.button.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
+        this.button.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
+    };
+    p.onButtonClick = function (e) {
+        switch (this.currentTaskStatus) {
+            case TaskStatus.ACCEPTABLE:
+                break;
+            case TaskStatus.DURING:
+                break;
+            case TaskStatus.CAN_SUBMIT:
+                break;
+            default:
+        }
     };
     p.onChange = function (task) {
         this.currentTaskId = task.id;

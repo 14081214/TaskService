@@ -7,12 +7,12 @@ var DialoguePanel = (function () {
         this.diaNameText = "";
         this.diaNameTextX = 45;
         this.diaNameTextY = 40;
-        this.diaNameTextWidth = 200;
+        this.diaNameTextWidth = 230;
         this.diaNameTexColor = 0xFFFFFF;
         this.diaStateTextField = "";
         this.diaStateTextX = 20;
         this.diaStateTextY = 90;
-        this.diaStateTextWidth = 180;
+        this.diaStateTextWidth = 230;
         this.diaStateTextColor = 0xFF0000;
         this.buttonColor = 0xC0C0C0;
         this.buttonX = 40;
@@ -110,13 +110,13 @@ var DialoguePanel = (function () {
     p.removePanel = function () {
         this.stage.removeChild(this.panel);
     };
-    p.onOpen = function (task) {
+    p.diaonOpen = function (task) {
         this.currentTaskId = task.id;
         this.changeTaskText(task.name, task.desc);
         this.changeButton(task.status);
         this.currentTaskStatus = task.status;
         this.showPanel();
-    }; //被通知
+    };
     p.changeTaskText = function (name, desc) {
         this.diaNameTextField.text = name;
         this.diaStateText.text = desc;

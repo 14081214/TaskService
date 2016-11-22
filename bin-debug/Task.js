@@ -17,6 +17,12 @@ var Task = (function () {
         this.toNpcId = toNpcId;
     }
     var d = __define,c=Task,p=c.prototype;
+    p.onAccept = function (task) {
+    };
+    p.onSubmit = function (task) {
+    };
+    p.checkTaskStatus = function () {
+    };
     return Task;
 }());
 egret.registerClass(Task,'Task');

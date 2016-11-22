@@ -18,7 +18,7 @@ class DialoguePanel {
 	private diaNameText = "";
 	private diaNameTextX = 45;
 	private diaNameTextY = 40;
-	private diaNameTextWidth = 200;
+	private diaNameTextWidth = 230;
 	private diaNameTexColor = 0xFFFFFF;
 
 
@@ -26,7 +26,7 @@ class DialoguePanel {
 	private diaStateTextField = "";
 	private diaStateTextX = 20;
 	private diaStateTextY = 90;
-	private diaStateTextWidth = 180;
+	private diaStateTextWidth = 230;
 	private diaStateTextColor = 0xFF0000;
 	
 	private button:egret.DisplayObjectContainer;
@@ -36,7 +36,6 @@ class DialoguePanel {
 	private buttonY = 140;
 	private buttonWidth = 180;
 	private buttonHeight = 45;
-
 
 	private buttonTextField:egret.TextField;
 	private buttonText = "OK";
@@ -147,7 +146,7 @@ class DialoguePanel {
 		this.stage.removeChild(this.panel);
 	}
 
-	public onOpen(task:Task) {
+	public diaonOpen(task:Task) {
 		this.currentTaskId = task.id;
 		this.changeTaskText(task.name,task.desc);
 		this.changeButton(task.status);
